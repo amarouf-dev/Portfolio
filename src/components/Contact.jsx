@@ -19,9 +19,12 @@ function LiveTerminal({ C }) {
     const [input, setInput] = useState("");
     const [cmdHistory, setCmdHistory] = useState([]);
     const [histIdx, setHistIdx] = useState(-1);
-    const bottomRef = useRef();
+    const scrollContainerRef = useRef();
 
-    useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [history]);
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container) container.scrollTop = container.scrollHeight;
+    }, [history]);
 
     const run = useCallback((raw) => {
         const cmd = raw.trim().toLowerCase();
@@ -50,7 +53,7 @@ function LiveTerminal({ C }) {
                 <span style={{ fontSize: ".58rem", color: C.muted, marginLeft: ".5rem" }}>interactive — bash</span>
                 <span style={{ marginLeft: "auto", fontSize: ".58rem", color: C.green, animation: "pulse 2s infinite" }}>● live</span>
             </div>
-            <div style={{ padding: "1rem 1.4rem", fontFamily: FONT, fontSize: ".74rem", lineHeight: 1.95, maxHeight: 260, overflowY: "auto" }}>
+            <div ref={scrollContainerRef} style={{ padding: "1rem 1.4rem", fontFamily: FONT, fontSize: ".74rem", lineHeight: 1.95, maxHeight: 260, overflowY: "auto" }}>
                 {history.map((h, i) => (
                     <div key={i} style={{ color: h.t === "sys" ? C.muted : h.t === "prompt" ? C.white : h.t }}>
                         {h.t === "prompt" && <span style={{ color: C.green }}>~ $ </span>}
@@ -61,9 +64,8 @@ function LiveTerminal({ C }) {
                     <span style={{ color: C.green }}>~ $ </span>
                     <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey}
                         style={{ background: "transparent", border: "none", outline: "none", fontFamily: FONT, fontSize: ".74rem", color: C.white, flex: 1, marginLeft: 6, caretColor: C.green }}
-                        placeholder="type a command..." autoFocus />
+                        placeholder="type a command..." />
                 </div>
-                <div ref={bottomRef} />
             </div>
         </div>
     );
@@ -74,7 +76,7 @@ function LiveTerminal({ C }) {
    ============================================================ */
 export default function Contact({ C }) {
     const [copied, setCopied] = useState(false);
-    const email = "abdallah.marouf@student.1337.ma";
+    const email = "abdellahmarof@gmail.com";
 
     return (
         <section id="contact" className="pad" style={{ maxWidth: 980, margin: "0 auto", padding: "6rem 2.5rem 8rem", position: "relative", zIndex: 2 }}>

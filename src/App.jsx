@@ -13,9 +13,8 @@ import { Divider } from "./components/Shared";
 const SECTION_IDS = ["home", "about", "projects", "skills", "contact"];
 
 export default function App() {
-  const [theme, setTheme] = useState("dark");
   const [activeSection, setActiveSection] = useState("home");
-  const C = THEMES[theme];
+  const C = THEMES.dark;
 
   // update global CSS when theme changes
   useEffect(() => {
@@ -39,13 +38,14 @@ export default function App() {
     return () => observers.forEach(o => o.disconnect());
   }, []);
 
-  const toggleTheme = () => setTheme(t => t === "dark" ? "light" : "dark");
+  // scroll to top on initial load
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: FONT, minHeight: "100vh", transition: "background .4s, color .4s" }}>
       <Particles C={C} />
       <Scanlines C={C} />
-      <Nav active={activeSection} theme={theme} toggleTheme={toggleTheme} C={C} />
+      <Nav active={activeSection} C={C} />
 
       <main>
         <Home C={C} />

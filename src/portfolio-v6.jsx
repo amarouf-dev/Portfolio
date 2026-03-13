@@ -729,7 +729,7 @@ function LiveTerminal({ C }) {
    ============================================================ */
 function Contact({ C }) {
   const [copied, setCopied] = useState(false);
-  const email = "abdallah.marouf@student.1337.ma";
+  const email = "abdellahmarof@gmail.com";
 
   return (
     <section id="contact" className="pad" style={{ maxWidth: 980, margin: "0 auto", padding: "6rem 2.5rem 8rem", position: "relative", zIndex: 2 }}>

@@ -51,6 +51,15 @@ export default function Home({ C }) {
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", animation: "slideUp .8s 1.1s both" }}>
                 <GlowBtn href="https://github.com/amarouf-dev" primary C={C}>GitHub Profile ↗</GlowBtn>
                 <GlowBtn onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })} C={C}>Get In Touch</GlowBtn>
+                <a href="/cv.pdf" download style={{
+                    padding: ".62rem 1.5rem", fontFamily: "'JetBrains Mono','Fira Code','Courier New',monospace",
+                    fontSize: ".72rem", fontWeight: 700, letterSpacing: 2, textTransform: "uppercase",
+                    cursor: "pointer", textDecoration: "none", display: "inline-block", transition: "all .2s",
+                    background: "transparent", color: C.text, border: `1px solid ${C.border}`,
+                }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = C.green; e.currentTarget.style.color = C.green; e.currentTarget.style.boxShadow = `0 0 18px ${C.greenGlow}`; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text; e.currentTarget.style.boxShadow = "none"; }}
+                >⬇ Download CV</a>
             </div>
 
             {/* stats row */}
